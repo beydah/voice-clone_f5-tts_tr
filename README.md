@@ -64,15 +64,16 @@ voice-clone_f5-tts_tr/
 # 1. Install dependencies
 pip install -r source/requirements.txt
 
-# 2. Denoise and prepare reference recording
-python source/clean_audio.py sample.m4a --output clean_ref.wav
-
-# 3. Synthesize Turkish speech
-python source/infer.py \
-  --ref-audio clean_ref.wav \
+# 2. Synthesize with the modular CLI
+python -m voice_clone.cli \
+  --ref sample.wav \
+  --clean-ref \
   --text "React ve yapay zeka entegrasyonunda bileşen sözleşmeleri kritik önem taşır." \
   --out speech.wav \
   --speed 1.05
+
+# Or use the standalone script:
+python source/infer.py --ref-audio clean_ref.wav --text "..." --out speech.wav
 ```
 
 For advanced CLI options and WebM Opus encoding, see [docs/USAGE.md](docs/USAGE.md).
